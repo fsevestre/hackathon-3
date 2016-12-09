@@ -18,9 +18,29 @@ class IntegerToRomanConverter implements ConverterInterface
      */
     public function convert($number)
     {
-        eval(base64_decode("JHRob3VzYW5kcyA9IChpbnQpICRudW1iZXIgLyAxMDAwOyRyZW1haW5pbmcgPSAkbnVtYmVyICUgMTAwMDskaHVuZHJlZHMgID0gKGludCkgJHJlbWFpbmluZyAvIDEwMDskcmVtYWluaW5nID0gJHJlbWFpbmluZyAlIDEwMDskdGVucyAgICAgID0gKGludCkgJHJlbWFpbmluZyAvIDEwOyRyZW1haW5pbmcgPSAkcmVtYWluaW5nICUgMTA7JHVuaXRzICAgICA9ICRyZW1haW5pbmc7JHJvbWFuID0gc3RyX3JlcGVhdCgiTSIsICR0aG91c2FuZHMpIC4gJHRoaXMtPmh1bmRyZWRzWyRodW5kcmVkc10gLiAkdGhpcy0+dGVuc1skdGVuc10gLiAkdGhpcy0+dW5pdHNbJHVuaXRzXTs="));
+        $romanNumerals = array(
+            'M' => 1000,
+            'CM' => 900,
+            'D' => 500,
+            'CD' => 400,
+            'C' => 100,
+            'XC' => 90,
+            'L' => 50,
+            'XL' => 40,
+            'X' => 10,
+            'IX' => 9,
+            'V' => 5,
+            'IV' => 4,
+            'I' => 1
+        );
 
-        return $roman;
+        $res = '';
+        foreach ($romanNumerals as $roman => $n) {
+            $res .= str_repeat($roman, $number / $n);
+
+            $number = $number % $n;
+        }
+
+        return $res;
     }
-
 }
